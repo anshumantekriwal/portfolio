@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grainy Black Background with Topbar</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="topbar">
+      <a href="#" class="topbar-logo">
+        <span class="typing-animation"
+          >Anshuman<span class="large-dot">.</span></span
+        >
+        <span class="designation">Student Developer</span>
+      </a>
+      <div class="topbar-links">
+        <a href="#" class="external-link"
+          >LinkedIn<span class="arrow">↗</span></a
+        >
+        <a href="#" class="external-link">Resume<span class="arrow">↗</span></a>
+        <a href="#" class="external-link">GitHub<span class="arrow">↗</span></a>
+      </div>
+    </div>
+    <nav class="capsule-menu">
+      <button class="active">Work</button>
+      <button>Info</button>
+    </nav>
+    <main>
+      <section id="work-section" class="content-section active">
+        <div class="work-content">
+          <div class="hero-text">
+            <h1>
+              I enjoy working with<br />
+              <span class="italic" id="changing-text">Deep Learning</span
+              ><span class="italic">.</span>
+            </h1>
+          </div>
+          <div class="info-bar">
+            <div class="info-item">
+              <span class="icon">💼</span>
+              <div class="info-content">
+                <h3>Recent Experience</h3>
+                <p>AI Intern @ Artus AI</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="icon">📍</span>
+              <div class="info-content">
+                <h3>Location</h3>
+                <p>Kolkata</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="custom-animation-container">
+          <video
+            id="customAnimation"
+            autoplay
+            loop
+            muted
+            playsinline
+            class="custom-animation"
+          >
+            <source src="./images/animation.webm" type="video/webm" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
+
+      <section id="info-section" class="content-section">
+        <h2>About Me</h2>
+        <p>Here's some information about myself...</p>
+        <!-- Add more information about yourself -->
+      </section>
+    </main>
+
+    <script>
+      // Capsule menu code
+      const capsuleMenu = document.querySelector(".capsule-menu");
+      const workSection = document.getElementById("work-section");
+      const infoSection = document.getElementById("info-section");
+
+      capsuleMenu.addEventListener("click", (e) => {
+        if (e.target.tagName === "BUTTON") {
+          const activeButton = document.querySelector(".capsule-menu .active");
+          activeButton.classList.remove("active");
+          e.target.classList.add("active");
+
+          if (e.target.textContent === "Work") {
+            workSection.style.display = "flex"; // Show work section
+            infoSection.style.display = "none"; // Hide info section
+            capsuleMenu.classList.remove("info-active");
+          } else if (e.target.textContent === "Info") {
+            infoSection.style.display = "block"; // Show info section
+            workSection.style.display = "none"; // Hide work section
+            capsuleMenu.classList.add("info-active");
+          }
+        }
+      });
+
+      // Updated code for changing text with animation
+      const changingText = document.getElementById("changing-text");
+      const words = [
+        "Machine Learning",
+        "Neural Networks",
+        "Deep Learning",
+        "Language Models",
+        "Computer Vision",
+      ];
+      let currentIndex = 0;
+
+      function changeText() {
+        changingText.classList.add("fade");
+
+        setTimeout(() => {
+          changingText.textContent = words[currentIndex];
+          currentIndex = (currentIndex + 1) % words.length;
+          changingText.classList.remove("fade");
+        }, 500);
+      }
+
+      setInterval(changeText, 2000); // Change text every 3 seconds
+
+      // Added code to force video playback
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const video = document.getElementById("customAnimation");
+        video.play().catch((error) => {
+          console.error("Error attempting to play video: ", error);
+        });
+      });
+    </script>
+  </body>
+</html>
